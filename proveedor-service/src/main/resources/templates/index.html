@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+
+</head>
+<body>
+<div class="container" th:fragment="nav-bar">
+    <nav class="navbar navbar-dark fixed-top" style="background-color: #A6173D;">
+        <div class="container-fluid z-3">
+            <a class="navbar-brand text-white" href="#"> <span class="text-white pe-1"><i class="fa-solid fa-rocket"></i></span>Project</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-end text-white" style="background-color: #8C142A;" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Content</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link active text-white" aria-current="page" th:href="@{/index}">
+                                <span class="text-white"><i class="fa-brands fa-fly"></i></span>
+                                Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" th:href="@{/table}">
+                                <span class="text-white"><i class="fa-solid fa-table-list"></i></span>
+                                Tabla
+                            </a>
+                        </li>
+                    </ul>
+                    <form class="d-flex mt-3" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-warning" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+
+<footer class="fixed-bottom text-white z-n1" th:fragment="footer">
+    <div class="text-center p-3" style="background-color: #A6173D;">
+        © 2023 Copyright
+    </div>
+</footer>
+
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+
+<script src="https://kit.fontawesome.com/387bf87449.js" crossorigin="anonymous"></script>
+
+</body>
+</html>

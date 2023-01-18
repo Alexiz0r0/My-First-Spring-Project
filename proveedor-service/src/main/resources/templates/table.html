@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/font-awesome/css/font-awesome.min.css}">
+
+</head>
+<body>
+
+<div th:replace="index :: nav-bar"></div>
+
+<div class="container overflow-auto" style="margin-top:100px; height: 500px;">
+    <div class="container px-6 text-center">
+        <div class="row gx-5">
+            <div class="col">
+                <div class="p-3"><h2><span class="badge text-bg-dark">Tabla de Proveedores:</span></h2></div>
+            </div>
+
+
+            <div class="col">
+                <div th:if="${alertMsg}" class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>[[${alertMsg}]]</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+
+
+            <div class="col">
+                <div class="p-3">
+                    <a class="btn btn-outline-dark btn-lg" th:href="@{/table/new-supplier}" role="button">Agregar Nuevo Proveedor</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <table class="table table-hover">
+        <thead class="table-danger">
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">RUC</th>
+            <th scope="col">Razon Social</th>
+            <th scope="col">Direccion</th>
+            <th scope="col">Distrito</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">Correo</th>
+            <th scope="col">Pagina Web</th>
+            <th scope="col">Editar</th>
+            <th scope="col">Eliminar</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="x:${listSupplier}">
+            <tr>
+                <td>[[${x.id}]]</td>
+                <td>[[${x.ruc}]]</td>
+                <td>[[${x.razonSocial}]]</td>
+                <td>[[${x.direccion}]]</td>
+                <td>[[${x.distrito}]]</td>
+                <td>[[${x.telefono}]]</td>
+                <td>[[${x.correo}]]</td>
+                <td>[[${x.paginaWeb}]]</td>
+                <td><a class="btn btn-outline-success" th:href="@{'/table/edit/'+${x.id}}" role="button">Editar</a></td>
+                <td><a class="btn btn-outline-danger" th:href="@{'/table/delete/'+${x.id}}" role="button">Eliminar</a></td>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
+</div>
+
+<div th:replace="index :: footer"></div>
+
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+
+<script src="https://kit.fontawesome.com/387bf87449.js" crossorigin="anonymous"></script>
+
+
+</body>
+</html>

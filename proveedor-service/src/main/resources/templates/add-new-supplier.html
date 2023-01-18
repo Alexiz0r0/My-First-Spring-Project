@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/font-awesome/css/font-awesome.min.css}">
+
+</head>
+<body>
+
+<div th:replace="index :: nav-bar"></div>
+
+<div class="container overflow-auto" style="margin-top:100px; height: 500px;">
+
+
+    <div class="text-center my-2">
+        <h2><span class="badge text-bg-dark">[[${titleForm}]]</span></h2>
+    </div>
+
+
+    <div class="row gx-3 w-50 mx-auto">
+        <div class="col">
+            <form th:action="@{/table/save}" method="post" th:object="${crudSupplier}">
+
+                <input type="hidden" th:field="*{id}">
+
+                <div class="form-floating mb-3">
+                    <input type="text" th:field="*{ruc}" class="form-control" id="ruc-form" placeholder="RUC" required>
+                    <label for="ruc-form">RUC</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" th:field="*{razonSocial}" class="form-control" id="razon-form" placeholder="Razon Social" required>
+                    <label for="razon-form">Razon Social</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" th:field="*{direccion}" class="form-control" id="direccion-form" placeholder="Direccion" required>
+                    <label for="direccion-form">Direccion</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" th:field="*{distrito}" class="form-control" id="distrito-form" placeholder="Distrito"  required>
+                    <label for="distrito-form">Distrito</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" th:field="*{telefono}" class="form-control" id="telefono-form" placeholder="Telefono"  required>
+                    <label for="telefono-form">Telefono</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" th:field="*{correo}" class="form-control" id="correo-form" placeholder="Correo"  required>
+                    <label for="correo-form">Correo</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" th:field="*{paginaWeb}" class="form-control" id="pagina-form" placeholder="Pagina Web"  required>
+                    <label for="pagina-form">Pagina web</label>
+                </div>
+                <div class="d-grid gap-2 d-md-block mx-auto">
+                    <button type="submit" class="btn btn-outline-dark btn-lg my-2">Guardar</button>
+                    <a class="btn btn-outline-danger btn-lg my-2" th:href="@{/table}" role="button">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="mt-5" th:replace="index :: footer"></div>
+
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+
+<script src="https://kit.fontawesome.com/387bf87449.js" crossorigin="anonymous"></script>
+
+</body>
+</html>
