@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@FeignClient(name = "proveedor-service")
+@FeignClient(name = "proveedor-service", path = "/supplierApi")
 public interface SupplierFeignClient {
 
     /* , url = "http://localhost:8003/supplierApi" */
