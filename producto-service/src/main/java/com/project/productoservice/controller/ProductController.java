@@ -91,17 +91,15 @@ public class ProductController {
     }
 
     ************************************************************ */
-
+    @CircuitBreaker(name = "allCB", fallbackMethod = "fallBackGetAll")
     @GetMapping("/getAll/{productId}")
     public ResponseEntity<Map<String, Object>> getAllPeople(@PathVariable("productId") Integer productId){
         Map<String, Object> result = productService.getProductsAndPeople(productId);
         return ResponseEntity.ok(result);
     }
-    /*
-    @CircuitBreaker(name = "allCB", fallbackMethod = "fallBackGetAll")
 
     private ResponseEntity<Map<String, Object>> fallBackGetAll(@PathVariable("productId") Integer productId, RuntimeException e){
         return new ResponseEntity("El producto "+productId+ " tiene cliente y proveedor", HttpStatus.OK);
-    }*/
+    }
 
 }
