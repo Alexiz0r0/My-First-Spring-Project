@@ -1,4 +1,18 @@
+
+
 spring:
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/dbdrone
+    username: root
+    password: j0ab1$Gr34t23
+
+  jpa:
+    hibernate.ddl-auto: update
+    generate-ddl: false
+    show-sql: true
+
+
   application:
     name: auth-service
 
