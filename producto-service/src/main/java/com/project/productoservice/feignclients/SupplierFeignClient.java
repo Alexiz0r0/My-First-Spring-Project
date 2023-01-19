@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @FeignClient(name = "proveedor-service")
+@RequestMapping("/supplierApi")
 public interface SupplierFeignClient {
 
     /*
