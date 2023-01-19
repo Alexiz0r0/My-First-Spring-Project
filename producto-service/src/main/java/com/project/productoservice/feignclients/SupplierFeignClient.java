@@ -6,9 +6,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@FeignClient(name = "proveedor-service", url = "http://localhost:8003/supplierApi")
+@FeignClient(name = "proveedor-service")
 public interface SupplierFeignClient {
 
+    /* , url = "http://localhost:8003/supplierApi" */
     /*
     @PostMapping()
     Supplier save(@RequestBody Supplier supplier);

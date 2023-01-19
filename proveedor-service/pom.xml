@@ -87,7 +87,6 @@
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
 
-		<!-- Add Jan18 - eureka-client -->
 
 
 	</dependencies>

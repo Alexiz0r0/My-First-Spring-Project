@@ -4,7 +4,9 @@ import com.project.productoservice.entity.Product;
 import com.project.productoservice.model.Customer;
 import com.project.productoservice.model.Supplier;
 import com.project.productoservice.service.ProductService;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,8 +43,33 @@ public class ProductController {
         return ResponseEntity.ok(newProduct);
     }
 
-    /* Imitar - create 2 class - model
+    /*
 
+    @CircuitBreaker(name = "clienteCB", fallbackMethod = "fallBackGetCliente")
+    @GetMapping("/costumer/{productId}")
+    public ResponseEntity<List<Customer>> getCustomer(@PathVariable("productId") Integer productId){
+        Product customer = productService.getProductById(productId);
+        if (customer == null){
+            return ResponseEntity.notFound().build();
+        }
+        List<Customer> customers = productService.getCustomers(productId);
+        return ResponseEntity.ok(customers);
+    }
+
+    @CircuitBreaker(name = "clienteCB", fallbackMethod = "fallBackSaveCliente")
+    @PostMapping("/saveNewCustomer/{productId}")
+    public ResponseEntity<Customer> saveCustomer(@PathVariable("productId") Integer productId, @RequestBody Customer customer){
+        if (productService.getProductById(productId) == null){
+            return ResponseEntity.notFound().build();
+        }
+        Customer customerNew = productService.saveNewCustomer(productId,customer);
+        return ResponseEntity.ok(customer);
+    }
+
+    *********************************************************** */
+    /*
+
+    @CircuitBreaker(name = "proveedorCB", fallbackMethod = "fallBackGetProveedor")
     @GetMapping("/supplier/{productId}")
     public ResponseEntity<List<Supplier>> getSupplier(@PathVariable("productId") Integer productId){
         Product product = productService.getProductById(productId);
@@ -53,28 +80,7 @@ public class ProductController {
         return ResponseEntity.ok(suppliers);
     }
 
-    @GetMapping("/costumer/{productId}")
-    public ResponseEntity<List<Customer>> getCustomer(@PathVariable("productId") Integer productId){
-        Product customer = productService.getProductById(productId);
-        if (customer == null){
-            return ResponseEntity.notFound().build();
-        }
-        List<Customer> customers = productService.getCustomers(productId);
-        return ResponseEntity.ok(customers);
-    }
-    */
-
-    /* Feign - Jam17 */
-    /*
-    @PostMapping("/saveNewCustomer/{productId}")
-    public ResponseEntity<Customer> saveCustomer(@PathVariable("productId") Integer productId, @RequestBody Customer customer){
-        if (productService.getProductById(productId) == null){
-            return ResponseEntity.notFound().build();
-        }
-        Customer customerNew = productService.saveNewCustomer(productId,customer);
-        return ResponseEntity.ok(customer);
-    }
-
+    @CircuitBreaker(name = "proveedorCB", fallbackMethod = "fallBackSaveProveedor")
     @PostMapping("/saveNewSupplier/{productId}")
     public ResponseEntity<Supplier> saveSupplier(@PathVariable("productId") Integer productId, @RequestBody Supplier supplier){
         if (productService.getProductById(productId) == null){
@@ -84,17 +90,16 @@ public class ProductController {
         return ResponseEntity.ok(supplier);
     }
 
+    ************************************************************ */
+    @CircuitBreaker(name = "allCB", fallbackMethod = "fallBackGetAll")
     @GetMapping("/getAll/{productId}")
     public ResponseEntity<Map<String, Object>> getAllPeople(@PathVariable("productId") Integer productId){
         Map<String, Object> result = productService.getProductsAndPeople(productId);
         return ResponseEntity.ok(result);
     }
-    */
 
-    @GetMapping("/getAll/{productId}")
-    public ResponseEntity<Map<String, Object>> getAllPeople(@PathVariable("productId") Integer productId){
-        Map<String, Object> result = productService.getProductsAndPeople(productId);
-        return ResponseEntity.ok(result);
+    private ResponseEntity<Map<String, Object>> fallBackGetAll(@PathVariable("productId") Integer productId, RuntimeException e){
+        return new ResponseEntity("El producto "+productId+ " no tiene cliente o proveedor", HttpStatus.OK);
     }
 
 }
