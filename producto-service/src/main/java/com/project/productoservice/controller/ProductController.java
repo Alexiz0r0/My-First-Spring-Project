@@ -98,7 +98,7 @@ public class ProductController {
         return ResponseEntity.ok(result);
     }
 
-    private ResponseEntity<Map<String, Object>> fallBackGetAll(@PathVariable("productId") Integer productId, RuntimeException e){
+    public ResponseEntity<Map<String, Object>> fallBackGetAll(@PathVariable("productId") Integer productId, RuntimeException e){
         return new ResponseEntity("El producto "+productId+ " tiene cliente y proveedor", HttpStatus.OK);
     }
 
