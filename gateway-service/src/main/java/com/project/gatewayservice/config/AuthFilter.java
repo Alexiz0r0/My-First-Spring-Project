@@ -20,7 +20,6 @@ public class AuthFilter extends AbstractGatewayFilterFactory<AuthFilter.Config> 
         super(Config.class);
         this.webClient = webClient;
     }
-
     @Override
     public GatewayFilter apply(Config config) {
         return (((exchange, chain) -> {
