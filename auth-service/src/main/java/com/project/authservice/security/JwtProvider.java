@@ -27,12 +27,18 @@ public class JwtProvider {
         Map<String, Object> claims = new HashMap<>();
         claims = Jwts.claims().setSubject(authUser.getUserName());
         claims.put("id", authUser.getId());
+
+        long expT = 2_592_000L * 1_000;
         Date now = new Date();
-        Date exp = new Date(now.getTime() + 3600000);
+        Date expD = new Date(System.currentTimeMillis()+expT);
+        /*
+         Date now = new Date();
+         Date exp = new Date(now.getTime() + 3600000);
+        */
         return Jwts.builder()
                 .setClaims(claims)
                 .setIssuedAt(now)
-                .setExpiration(exp)
+                .setExpiration(expD)
                 .signWith(SignatureAlgorithm.HS256, secret)
                 .compact();
     }
