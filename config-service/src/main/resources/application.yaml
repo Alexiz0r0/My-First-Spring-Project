@@ -5,7 +5,7 @@ spring:
     config:
       server:
         git:
-          default-label: jwt-42min
+          default-label: crud-test
           uri: https://github.com/Alexiz0r0/My-First-Spring-Project
           search-paths:
             - config-data
