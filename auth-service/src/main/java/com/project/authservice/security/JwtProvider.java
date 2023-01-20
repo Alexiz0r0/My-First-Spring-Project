@@ -14,6 +14,7 @@ import java.util.Map;
 
 @Component
 public class JwtProvider {
+
     @Value("${jwt.secret}")
     private String secret;
 
@@ -52,5 +53,4 @@ public class JwtProvider {
             return "bad token";
         }
     }
-
 }

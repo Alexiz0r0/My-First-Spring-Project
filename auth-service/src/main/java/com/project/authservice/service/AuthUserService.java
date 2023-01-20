@@ -6,6 +6,7 @@ import com.project.authservice.entity.AuthUser;
 import com.project.authservice.repository.AuthUserRepository;
 import com.project.authservice.security.JwtProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -16,31 +17,31 @@ public class AuthUserService {
 
     @Autowired
     AuthUserRepository authUserRepository;
+
     @Autowired
     PasswordEncoder passwordEncoder;
+
     @Autowired
     JwtProvider jwtProvider;
 
-    public AuthUser save(AuthUserDto dto){
+    public AuthUser save(AuthUserDto dto) {
         Optional<AuthUser> user = authUserRepository.findByUserName(dto.getUserName());
-        if(user.isPresent()){
+        if(user.isPresent())
             return null;
-        }
         String password = passwordEncoder.encode(dto.getPassword());
-
-        AuthUser authUser = AuthUser.builder().userName(dto.getUserName()).password(password).build();
-
+        AuthUser authUser = AuthUser.builder()
+                .userName(dto.getUserName())
+                .password(password)
+                .build();
         return authUserRepository.save(authUser);
     }
 
-    public TokenDto login(AuthUserDto dto){
+    public TokenDto login(AuthUserDto dto) {
         Optional<AuthUser> user = authUserRepository.findByUserName(dto.getUserName());
-        if (!user.isPresent()){
+        if(!user.isPresent())
             return null;
-        }
-        if (passwordEncoder.matches(dto.getPassword(), user.get().getPassword())){
+        if(passwordEncoder.matches(dto.getPassword(), user.get().getPassword()))
             return new TokenDto(jwtProvider.createToken(user.get()));
-        }
         return null;
     }
 
