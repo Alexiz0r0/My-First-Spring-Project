@@ -40,4 +40,4 @@ spring:
         - id: proveedor-service
           uri: lb://proveedor-service
           predicates:
-            - Path=/**
+            - Path=/web/**
